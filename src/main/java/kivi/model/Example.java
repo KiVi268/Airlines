@@ -7,27 +7,27 @@ import java.util.List;
 public class Example {
 
     @JsonProperty("ForumProfiles")
-    public List<ForumProfile> forumProfiles;
+    public List<FrequentFlyer> frequentFlyers;
 
     public Example() {
     }
 
-    public Example(List<ForumProfile> forumProfiles) {
-        this.forumProfiles = forumProfiles;
+    public Example(List<FrequentFlyer> frequentFlyers) {
+        this.frequentFlyers = frequentFlyers;
     }
 
-    public List<ForumProfile> getForumProfiles() {
-        return forumProfiles;
+    public List<FrequentFlyer> getForumProfiles() {
+        return frequentFlyers;
     }
 
-    public void setForumProfiles(List<ForumProfile> forumProfiles) {
-        this.forumProfiles = forumProfiles;
+    public void setForumProfiles(List<FrequentFlyer> frequentFlyers) {
+        this.frequentFlyers = frequentFlyers;
     }
 
     @Override
     public String toString() {
         return "Example{" +
-                "forumProfiles=" + forumProfiles +
+                "forumProfiles=" + frequentFlyers +
                 '}';
     }
 }
