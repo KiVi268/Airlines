@@ -6,7 +6,7 @@ import kivi.repository.FrequentFlyerRepository;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-
+//АЙ ЯЙ ЯЙ заебал пользоваться нейронками + перепиши вручную
 public class Main {
     public static void main(String[] args) {
         testFrequentFlyerRepository();
@@ -19,7 +19,7 @@ public class Main {
     }
 
     private static void testLoadData() {
-        System.out.println("\nТест 1: Загрузка данных из файла");
+        System.out.println("\nТест 1: Загрузка данных из файла...");
         try {
             FrequentFlyerRepository repository = new FrequentFlyerRepository("FrequentFlyerForum-Profiles.json");
             List<FrequentFlyer> flyers = repository.getFrequentFlyerNames();
