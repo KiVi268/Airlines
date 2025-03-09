@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Example {
 
-    @JsonProperty("ForumProfiles")
-    public List<FrequentFlyer> frequentFlyers;
+    @JsonProperty("Forum Profiles")
+    private List<FrequentFlyer> frequentFlyers;
 
     public Example() {
     }

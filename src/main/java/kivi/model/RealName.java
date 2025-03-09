@@ -4,10 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RealName {
 
-    @JsonProperty("LastName")
-    public Object lastName;
-    @JsonProperty("FirstName")
-    public Object firstName;
+    @JsonProperty("Last Name")
+    private Object lastName;
+    
+    @JsonProperty("First Name")
+    private Object firstName;
 
     public RealName() {
     }

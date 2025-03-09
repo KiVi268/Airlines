@@ -1,7 +1,8 @@
 package kivi.repository;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import kivi.model.Example;
 import kivi.model.FrequentFlyer;
 import kivi.model.RegisteredFlight;
 
@@ -12,12 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FrequentFlyerRepository {
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private ObjectMapper objectMapper;
     private ArrayList<FrequentFlyer> frequentFlyerNames;
 
     public FrequentFlyerRepository(String fileName) throws IOException {
+        this.objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        
         try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(fileName))) {
-            this.frequentFlyerNames = objectMapper.readValue(bufferedInputStream, new TypeReference<>() {});
+            Example example = objectMapper.readValue(bufferedInputStream, Example.class);
+            this.frequentFlyerNames = new ArrayList<>(example.getForumProfiles());
         }
     }
 

@@ -6,18 +6,23 @@ import java.util.List;
 
 public class FrequentFlyer {
 
-    @JsonProperty("RegisteredFlights")
-    public List<RegisteredFlight> registeredFlights;
+    @JsonProperty("Registered Flights")
+    private List<RegisteredFlight> registeredFlights;
+    
     @JsonProperty("NickName")
-    public String nickName;
-    @JsonProperty("TravelDocuments")
-    public List<TravelDocument> travelDocuments;
+    private String nickName;
+    
+    @JsonProperty("Travel Documents")
+    private List<TravelDocument> travelDocuments;
+    
     @JsonProperty("Sex")
-    public String sex;
-    @JsonProperty("LoyalityProgramm")
-    public List<LoyalityProgramm> loyalityProgramm;
-    @JsonProperty("RealName")
-    public RealName realName;
+    private String sex;
+    
+    @JsonProperty("Loyality Programm")
+    private List<LoyalityProgramm> loyalityProgramm;
+    
+    @JsonProperty("Real Name")
+    private RealName realName;
 
     public FrequentFlyer() {
     }
@@ -83,7 +88,7 @@ public class FrequentFlyer {
 
     @Override
     public String toString() {
-        return "ForumProfile{" +
+        return "FrequentFlyer{" +
                 "registeredFlights=" + registeredFlights +
                 ", nickName='" + nickName + '\'' +
                 ", travelDocuments=" + travelDocuments +
