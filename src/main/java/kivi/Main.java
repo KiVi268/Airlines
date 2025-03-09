@@ -19,7 +19,7 @@ public class Main {
     }
 
     private static void testLoadData() {
-        System.out.println("\nТест 1: Загрузка данных из файла");
+        System.out.println("\nТест 1: Загрузка данных из файла...");
         try {
             FrequentFlyerRepository repository = new FrequentFlyerRepository("FrequentFlyerForum-Profiles.json");
             List<FrequentFlyer> flyers = repository.getFrequentFlyerNames();
