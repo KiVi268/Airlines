@@ -6,7 +6,7 @@ import kivi.repository.FrequentFlyerRepository;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-
+//АЙ ЯЙ ЯЙ заебал пользоваться нейронками + перепиши вручную
 public class Main {
     public static void main(String[] args) {
         testFrequentFlyerRepository();

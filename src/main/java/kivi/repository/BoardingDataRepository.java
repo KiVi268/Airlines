@@ -6,6 +6,7 @@ import kivi.model.BoardingData;
 import java.io.*;
 import java.util.List;
 
+// Почему класс не используется и почему не протестирован
 public class BoardingDataRepository {
     private List<BoardingData> boardingDataRepositoryList;
     private ObjectMapper objectMapper;
@@ -52,6 +53,7 @@ public class BoardingDataRepository {
         }
     }
 
+    // также пропиши задание к методу
     public void saveToJSON(String jsonFile) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(jsonFile));
         objectMapper.writeValue(bufferedWriter, boardingDataRepositoryList);
