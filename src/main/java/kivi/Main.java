@@ -1,75 +1,82 @@
 package kivi;
 
-import kivi.model.FrequentFlyer;
+import kivi.model.json.FrequentFlyer;
+import kivi.model.csv.BoardingDataCSV;
+import kivi.repository.BoardingDataRepository;
 import kivi.repository.FrequentFlyerRepository;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+//todoАЙ ЯЙ ЯЙ заебал пользоваться нейронками + перепиши вручную
 public class Main {
-    public static void main(String[] args) {
-        testFrequentFlyerRepository();
-    }
+    public static void main(String[] args) throws IOException {
+        FrequentFlyerRepository frequentFlyerRepository = new FrequentFlyerRepository("FrequentFlyerForum-Profiles.json");
+        BoardingDataRepository boardingDataRepository = new BoardingDataRepository("BoardingData.csv");
 
-    private static void testFrequentFlyerRepository() {
-        testLoadData();
-        testFindByDepartureCity();
-        testFindByDepartureDateAfter();
-    }
 
-    private static void testLoadData() {
-        System.out.println("\nТест 1: Загрузка данных из файла");
+        /**
+         * @FrequentFlyersRepository
+         */
+
+        System.out.println("Loading data from file...");
         try {
-            FrequentFlyerRepository repository = new FrequentFlyerRepository("FrequentFlyerForum-Profiles.json");
-            List<FrequentFlyer> flyers = repository.getFrequentFlyerNames();
-            
+            List<FrequentFlyer> flyers = frequentFlyerRepository.getFrequentFlyerNames();
+
             if (flyers != null && !flyers.isEmpty()) {
-                System.out.println("Успешно: Данные загружены, количество записей: " + flyers.size());
-                System.out.println("Пример данных: " + flyers.get(0));
+                System.out.println("Found " + flyers.size() + " Frequent Flyers");
+                System.out.println("Example Frequent Flyer: " + flyers.get(0));
             } else {
-                System.out.println("Ошибка: Данные не загружены или список пуст");
+                System.out.println("No Frequent Flyers found");
             }
-        } catch (IOException e) {
-            System.out.println("Ошибка при загрузке данных: " + e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Eror loading data from file", e);
         }
-    }
 
-    private static void testFindByDepartureCity() {
-        System.out.println("\nТест 2: Поиск по городу отправления");
+        System.out.println("\nFind Depature City...");
         try {
-            FrequentFlyerRepository repository = new FrequentFlyerRepository("FrequentFlyerForum-Profiles.json");
-            String testCity = "Boston MA";
-            List<FrequentFlyer> results = repository.findByDepartureCity(testCity);
-            
-            if (results != null && !results.isEmpty()) {
-                System.out.println("Успешно: Найдены полеты из города " + testCity);
-                System.out.println("Количество найденных записей: " + results.size());
-                System.out.println("Пример найденной записи: " + results.get(0));
-            } else {
-                System.out.println("Результат: Полеты из города " + testCity + " не найдены");
-            }
-        } catch (IOException e) {
-            System.out.println("Ошибка при поиске по городу: " + e.getMessage());
-        }
-    }
+            String city = "Boston MA";
+            List<FrequentFlyer> results = frequentFlyerRepository.findByDepartureCity(city);
 
-    private static void testFindByDepartureDateAfter() {
-        System.out.println("\nТест 3: Поиск по дате вылета");
-        try {
-            FrequentFlyerRepository repository = new FrequentFlyerRepository("FrequentFlyerForum-Profiles.json");
-            LocalDate testDate = LocalDate.parse("2017-05-01");
-            List<FrequentFlyer> results = repository.findByDepartureDateAfter(testDate);
-            
             if (results != null && !results.isEmpty()) {
-                System.out.println("Успешно: Найдены полеты после даты " + testDate);
-                System.out.println("Количество найденных записей: " + results.size());
-                System.out.println("Пример найденной записи: " + results.get(0));
+                System.out.println("Found " + results.size() + " Frequent Flyers");
+                System.out.println("Example Frequent Flyer: " + results.get(0));
             } else {
-                System.out.println("Результат: Полеты после даты " + testDate + " не найдены");
+                System.out.println("No Frequent Flyers found");
             }
-        } catch (IOException e) {
-            System.out.println("Ошибка при поиске по дате: " + e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Error finding Depature City", e);
         }
+
+        System.out.println("\nFind by Depature date after...");
+        try {
+            LocalDate depatureDate = LocalDate.parse("2020-01-01");
+            List<FrequentFlyer> resultDate = frequentFlyerRepository.findByDepartureDateAfter(depatureDate);
+
+            if (resultDate != null && !resultDate.isEmpty()) {
+                System.out.println("Found " + resultDate.size() + " Frequent Flyers");
+                System.out.println("Example Frequent Flyer: " + resultDate.get(0));
+            } else {
+                System.out.println("No Frequent Flyers found");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error finding Depature date after", e);
+        }
+
+        /**
+         * @BoardingDataRepository
+         */
+
+        System.out.println("\nGetting Boarding Data List...");
+        String cvs = "BoardingData.csv";
+
+        //boardingDataRepository.loadFromCSV(cvs);
+        List<BoardingDataCSV> boardingDataList = boardingDataRepository.getBoardingDataList();
+        System.out.println("Data from csv:" + boardingDataList);
+        boardingDataRepository.saveToJSON("BoardingData.json");
+        System.out.println("All files saved!");
+
+
     }
 }

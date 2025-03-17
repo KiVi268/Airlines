@@ -1,8 +1,8 @@
-package kivi.model;
+package kivi.model.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Arrival {
+public class Departure {
 
     @JsonProperty("City")
     public String city;
@@ -11,10 +11,10 @@ public class Arrival {
     @JsonProperty("Country")
     public String country;
 
-    public Arrival() {
+    public Departure() {
     }
 
-    public Arrival(String city, String airport, String country) {
+    public Departure(String city, String airport, String country) {
         this.city = city;
         this.airport = airport;
         this.country = country;
@@ -46,7 +46,7 @@ public class Arrival {
 
     @Override
     public String toString() {
-        return "Arrival{" +
+        return "Departure{" +
                 "city='" + city + '\'' +
                 ", airport='" + airport + '\'' +
                 ", country='" + country + '\'' +

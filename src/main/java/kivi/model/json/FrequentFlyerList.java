@@ -1,18 +1,18 @@
-package kivi.model;
+package kivi.model.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class Example {
+public class FrequentFlyerList {
 
     @JsonProperty("Forum Profiles")
     private List<FrequentFlyer> frequentFlyers;
 
-    public Example() {
+    public FrequentFlyerList() {
     }
 
-    public Example(List<FrequentFlyer> frequentFlyers) {
+    public FrequentFlyerList(List<FrequentFlyer> frequentFlyers) {
         this.frequentFlyers = frequentFlyers;
     }
 
