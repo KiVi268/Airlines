@@ -1,19 +1,21 @@
 package kivi.model.csv;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Objects;
 
 public class BoardingDataCSV {
     private String passengerFirstName;
     private String passengerSecondName;
     private String passengerLastName;
     private String passengerSex;
-    private String passengerBirthDate;
+    private LocalDate passengerBirthDate;
     private String passengerDocument;
     private String bookingCode;
     private String ticketNumber;
     private String baggage;
-    private String flightDate;
-    private String flightTime;
+    private LocalDate flightDate;
+    private LocalTime flightTime;
     private String flightNumber;
     private String codeShare;
     private String destination;
@@ -21,7 +23,12 @@ public class BoardingDataCSV {
     public BoardingDataCSV() {
     }
 
-    public BoardingDataCSV(String passengerFirstName, String passengerSecondName, String passengerLastName, String passengerSex, String passengerBirthDate, String passengerDocument, String bookingCode, String ticketNumber, String baggage, String flightDate, String flightTime, String flightNumber, String codeShare, String destination) {
+    public BoardingDataCSV(String passengerFirstName, String passengerSecondName,
+                           String passengerLastName, String passengerSex,
+                           LocalDate passengerBirthDate, String passengerDocument,
+                           String bookingCode, String ticketNumber, String baggage,
+                           LocalDate flightDate, LocalTime flightTime, String flightNumber,
+                           String codeShare, String destination) {
         this.passengerFirstName = passengerFirstName;
         this.passengerSecondName = passengerSecondName;
         this.passengerLastName = passengerLastName;
@@ -70,11 +77,11 @@ public class BoardingDataCSV {
         this.passengerSex = passengerSex;
     }
 
-    public String getPassengerBirthDate() {
+    public LocalDate getPassengerBirthDate() {
         return passengerBirthDate;
     }
 
-    public void setPassengerBirthDate(String passengerBirthDate) {
+    public void setPassengerBirthDate(LocalDate passengerBirthDate) {
         this.passengerBirthDate = passengerBirthDate;
     }
 
@@ -110,19 +117,19 @@ public class BoardingDataCSV {
         this.baggage = baggage;
     }
 
-    public String getFlightDate() {
+    public LocalDate getFlightDate() {
         return flightDate;
     }
 
-    public void setFlightDate(String flightDate) {
+    public void setFlightDate(LocalDate flightDate) {
         this.flightDate = flightDate;
     }
 
-    public String getFlightTime() {
+    public LocalTime getFlightTime() {
         return flightTime;
     }
 
-    public void setFlightTime(String flightTime) {
+    public void setFlightTime(LocalTime flightTime) {
         this.flightTime = flightTime;
     }
 
@@ -148,6 +155,18 @@ public class BoardingDataCSV {
 
     public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        BoardingDataCSV that = (BoardingDataCSV) o;
+        return Objects.equals(passengerFirstName, that.passengerFirstName) && Objects.equals(passengerSecondName, that.passengerSecondName) && Objects.equals(passengerLastName, that.passengerLastName) && Objects.equals(passengerSex, that.passengerSex) && Objects.equals(passengerBirthDate, that.passengerBirthDate) && Objects.equals(passengerDocument, that.passengerDocument) && Objects.equals(bookingCode, that.bookingCode) && Objects.equals(ticketNumber, that.ticketNumber) && Objects.equals(baggage, that.baggage) && Objects.equals(flightDate, that.flightDate) && Objects.equals(flightTime, that.flightTime) && Objects.equals(flightNumber, that.flightNumber) && Objects.equals(codeShare, that.codeShare) && Objects.equals(destination, that.destination);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(passengerFirstName, passengerSecondName, passengerLastName, passengerSex, passengerBirthDate, passengerDocument, bookingCode, ticketNumber, baggage, flightDate, flightTime, flightNumber, codeShare, destination);
     }
 
     @Override

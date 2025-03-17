@@ -5,11 +5,13 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import kivi.model.csv.BoardingDataCSV;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-//todo Почему класс не используется и почему не протестирован
 
 /**
  * Для обработки файла BoardingData.csv создать отдельную модель данных и репозиторий.
@@ -26,26 +28,29 @@ public class BoardingDataRepository {
 
     public BoardingDataRepository(String fileName) throws IOException {
         this.objectMapper = new ObjectMapper();
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        DateTimeFormatter standartDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         objectMapper.registerModule(new JavaTimeModule());
         this.boardingDataRepositoryList = new ArrayList<>();
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))){
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             bufferedReader.readLine();
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
-                if (!line.isEmpty()){
+                if (!line.isEmpty()) {
                     String[] data = line.split(";");
                     BoardingDataCSV boardingDataCSV = new BoardingDataCSV(
                             data[0],
                             data[1],
                             data[2],
                             data[3],
-                            data[4],
+                            LocalDate.parse(data[4], dateFormat),
                             data[5],
                             data[6],
                             data[7],
                             data[8],
-                            data[9],
-                            data[10],
+                            LocalDate.parse(data[9], standartDateFormat),
+                            LocalTime.parse(data[10], dateTimeFormatter),
                             data[11],
                             data[12],
                             data[13]
@@ -72,8 +77,6 @@ public class BoardingDataRepository {
         this.objectMapper = objectMapper;
     }
 
-    //todo также пропиши задание к методу
-    //сделано
     public List<BoardingDataCSV> saveToJSON(String jsonFile) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(jsonFile));
         objectMapper.writeValue(bufferedWriter, boardingDataRepositoryList);

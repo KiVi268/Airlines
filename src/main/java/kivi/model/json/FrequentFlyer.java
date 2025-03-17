@@ -1,4 +1,4 @@
-package kivi.model;
+package kivi.model.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

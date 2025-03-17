@@ -2,9 +2,9 @@ package kivi.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import kivi.model.FrequentFlyerList;
-import kivi.model.FrequentFlyer;
-import kivi.model.RegisteredFlight;
+import kivi.model.json.FrequentFlyerList;
+import kivi.model.json.FrequentFlyer;
+import kivi.model.json.RegisteredFlight;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -21,22 +21,17 @@ public class FrequentFlyerRepository {
         objectMapper.registerModule(new JavaTimeModule());
         
         try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(fileName))) {
-            //todo Замени на логичное название
-            // так класс называется
             FrequentFlyerList frequentFlyerList = objectMapper.readValue(bufferedInputStream, FrequentFlyerList.class);
-            //todo храни в памяти сразу объект, а не список из этого объекта
             this.frequentFlyerNames = new ArrayList<>(frequentFlyerList.getForumProfiles());
         }
     }
 
-    //todo Комменты поставь над методами, у меня же нет задания)
+
     public List<FrequentFlyer> findByDepartureCity(String city) {
         List<FrequentFlyer> result = new ArrayList<>();
         for (FrequentFlyer flyer : frequentFlyerNames) {
             for (RegisteredFlight flight : flyer.getRegisteredFlights()) {
                 if (flight.getDeparture() != null &&
-                        //todo У тебя в этом классе есть поле city используй его
-                        // + ко всему этот код не правильно работает
                         flight.getDeparture().getCity().equalsIgnoreCase(city)) {
                     result.add(flyer);
                     break;
@@ -60,7 +55,7 @@ public class FrequentFlyerRepository {
                             break;
                         }
 
-                    } //todo если блок catch пустой, то можно юзать вместо e -> ignored
+                    }
                      catch (Exception ignored) {}
                 }
             }

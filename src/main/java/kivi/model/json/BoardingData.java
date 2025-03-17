@@ -1,4 +1,4 @@
-package kivi.model;
+package kivi.model.json;
 
 public class BoardingData {
     private String passengerId;
